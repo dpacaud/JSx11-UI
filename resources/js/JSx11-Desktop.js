@@ -16,20 +16,6 @@ var JSx11Desktop = $.inherit({
 
     initialise: function() {
         jsx11.core.renderTemplate("#desktop", "desktop/Desktop.html"); // Render Desktop Template
-        jsx11.core.renderTemplate("#taskbar", "desktop/Taskbar.html"); // Render Taskbar Template
-
-        // Set Desktop Size
-        executeAsync(function(){$("#desktop").css("bottom", jsx11.taskbar.height+"px");});
-
-        this.setBackgroundImage("resources/images/background_image.jpg");
-    },
-
-    setBackgroundImage: function(bgImage) {
-        this.backgroundImage = bgImage;
-        setTimeout(function(){
-            $("#desktop").css("background-image", "url("+bgImage+")");
-            $("#desktop").css("background-position", "top right");
-            $("#desktop").css("background-repeat", "no-repeat");
-        }, 50);
     }
+
 });
