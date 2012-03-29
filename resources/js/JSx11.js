@@ -11,7 +11,7 @@ var jsx11 = null;
 
 /***************************************************************************************************
  * Entry point of JSx11 Application
- * Executed when index.html page is loaded
+ * Executed when index.html page is loaded.
  */
 $(function() {
     debug("Starting JSx11-Client...");
