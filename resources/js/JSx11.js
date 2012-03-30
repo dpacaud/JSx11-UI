@@ -4,9 +4,11 @@
  * Date: 28/03/12
  * Time: 18:34
  */
+__require("JSx11-Log.js");
 __require("JSx11-Core.js");
 
 var JSx11_BASE_URL = "http://localhost/JSx11-Client/";
+var log =  null;
 var jsx11 = null;
 
 /***************************************************************************************************
@@ -14,7 +16,11 @@ var jsx11 = null;
  * Executed when index.html page is loaded.
  */
 $(function() {
-    debug("Starting JSx11-Client...");
+    // Initialise Logger
+    log = new JSx11Log();
+    log.logLevel = log.LEVEL_DEBUG;
+
+    // Initilaise JSx11 Application
     jsx11 = new JSx11();
     jsx11.initialise();
     jsx11.core.waitForModulesLoaded(function() {

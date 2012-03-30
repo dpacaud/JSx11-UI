@@ -14,13 +14,13 @@ var JSx11Core = $.inherit({
         this.isLoading = false;
 
         // Call initialise method
-        debug("JSx11Core","JSx11Core is instantiated !");
+        log.debug("JSx11Core","JSx11Core is instantiated !");
         this.initialise();
     },
 
 
     initialise: function() {
-        debug("JSx11Core","JSx11Core is initialised !");
+        log.debug("JSx11Core","JSx11Core is initialised !");
     },
 
 
@@ -83,7 +83,7 @@ var JSx11Core = $.inherit({
     __loadQueuedModules: function() {
         // Retrieve next module to load
         var module = this.loadingQueue.shift();
-        debug("JSx11-Core", "Loading module "+module.moduleName+"...");
+        log.debug("JSx11-Core", "Loading module "+module.moduleName+"...");
 
         // Load module
         this.isLoading = true;
@@ -94,10 +94,10 @@ var JSx11Core = $.inherit({
 
         // Buils loading module callback
         var callback = function() {
-            debug("JSx11-Core", "Module "+module.moduleName+" is loaded !");
+            log.info("JSx11-Core", "Module "+module.moduleName+" is loaded !");
             if(jsx11.core.loadingQueue.length == 0) {
                 jsx11.core.isLoading = false;
-                debug("JSx11-Core", "All queued modules are loaded !");
+                log.debug("JSx11-Core", "All queued modules are loaded !");
                 if(!isUndefined(module.callback)) {
                     module.callback();
                 }
