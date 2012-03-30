@@ -5,6 +5,7 @@
  * Time: 18:34
  */
 __require("modules/JSx11-Log.js");
+__require("modules/JSx11-Signals.js");
 __require("modules/JSx11-Core.js");
 
 var JSx11_BASE_URL = "http://localhost/JSx11-Client/";
@@ -46,6 +47,7 @@ var JSx11 = $.inherit({
      */
     __constructor : function(){
         this.core = new JSx11Core();
+        this.signalManager = new JSx11SignalManager();
     },
 
 
@@ -53,6 +55,12 @@ var JSx11 = $.inherit({
      * Initialise JSx11 Application
      */
     initialise: function() {
+        // Initialise signal manager
+        this.signalManager.initialise();
+
+        // Register JSx11 Application Class as Signal listener
+        addSignalListener(jsx11);
+
         // Load needed modules
         this.core.loadModule("ui/JSx11-Desktop");
         this.core.loadModule("ui/JSx11-Taskbar");
@@ -66,6 +74,19 @@ var JSx11 = $.inherit({
 
 
     /**
+     * Method triggered when signal is received
+     * @param signal
+     */
+    onSignalReceived: function(signal) {
+        if(signal.getType() == SIGNAL_KILL) {
+            log.debug("Signal kill received !");
+        } else {
+            log.debug("Signal received: " + signal.getType());
+        }
+    },
+
+
+    /**
      * Initialise User Desktop
      */
     initialiseUserDesktop: function() {
@@ -75,6 +96,9 @@ var JSx11 = $.inherit({
         // Initialise Taskbar and Desktop
         jsx11.taskbar.initialise();
         jsx11.desktop.initialise();
+
+        sendSignal("toot");
+        sendSignal(SIGNAL_KILL);
     }
 });
 /*
@@ -87,7 +111,7 @@ var JSx11 = $.inherit({
  * UTILS
  */
 function executeAsync(method) {
-    setTimeout(method, 60);
+    setTimeout(method, 50);
 }
 
 function debug(className, log_txt) {
