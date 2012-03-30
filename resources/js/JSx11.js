@@ -4,8 +4,8 @@
  * Date: 28/03/12
  * Time: 18:34
  */
-__require("JSx11-Log.js");
-__require("JSx11-Core.js");
+__require("modules/JSx11-Log.js");
+__require("modules/JSx11-Core.js");
 
 var JSx11_BASE_URL = "http://localhost/JSx11-Client/";
 var log =  null;
@@ -54,8 +54,8 @@ var JSx11 = $.inherit({
      */
     initialise: function() {
         // Load needed modules
-        this.core.loadModule("JSx11-Desktop");
-        this.core.loadModule("JSx11-Taskbar");
+        this.core.loadModule("ui/JSx11-Desktop");
+        this.core.loadModule("ui/JSx11-Taskbar");
 
         // Callback
         jsx11.core.waitForModulesLoaded(function() {
