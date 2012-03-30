@@ -18,7 +18,12 @@ $(function() {
     jsx11 = new JSx11();
     jsx11.initialise();
     jsx11.core.waitForModulesLoaded(function() {
+        debug("ok2");
         jsx11.initialiseUserDesktop();
+    });
+    jsx11.core.loadModule("JSx11-Auth");
+    jsx11.core.waitForModulesLoaded(function() {
+        debug("ok3");
     });
 });
 /*
@@ -53,6 +58,7 @@ var JSx11 = $.inherit({
 
         // Callback
         jsx11.core.waitForModulesLoaded(function() {
+            debug("ok1");
             jsx11.desktop = new JSx11Desktop();
             jsx11.taskbar = new JSx11Taskbar();
         });
@@ -95,4 +101,9 @@ function debug(className, log_txt) {
 
 function __require(file) {
     document.write("<script type='text/javascript' src='resources/js/"+file+"'><\/script>");
+}
+
+function isUndefined(variable) {
+    if(window.eval("typeof "+variable) != 'undefined') return false;
+    else return true;
 }

@@ -51,10 +51,6 @@ var JSx11Core = $.inherit({
      * @param loadingCallback Callback method
      */
     loadModule: function(moduleName, loadingCallback) {
-        //////////////////////////////////////////////////////////////////////////////
-        // TODO: Bug Fix -> Fix erase of waitingForModulesLoaded callbacks when adding
-        //       module after a call to waitingForModulesLoaded method
-
         // Queue module
         if(loadingCallback) {
             this.loadingQueue.push({moduleName: moduleName, callback: loadingCallback});
@@ -102,9 +98,13 @@ var JSx11Core = $.inherit({
             if(jsx11.core.loadingQueue.length == 0) {
                 jsx11.core.isLoading = false;
                 debug("JSx11-Core", "All queued modules are loaded !");
-                if(module.callback) module.callback();
+                if(!isUndefined(module.callback)) {
+                    module.callback();
+                }
             } else {
-                if(module.callback) module.callback();
+                if(!isUndefined(module.callback)) {
+                    module.callback();
+                }
                 jsx11.core.__loadQueuedModules();
             }
         }
